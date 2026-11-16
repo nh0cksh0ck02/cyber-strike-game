@@ -7,9 +7,12 @@ const outputDir = resolve(process.env.MAKEFUN_OUTPUT_DIR ?? '/output');
 // Ensure output directory exists
 mkdirSync(outputDir, { recursive: true });
 
+// Base bot directory (handles execution from arbitrary working directory)
+const botDir = process.env.MAKEFUN_BOT_DIR ?? resolve(import.meta.dirname ?? '.');
+
 // Copy game/ and screenshots/ directories
-const srcGame = resolve('game');
-const srcScreenshots = resolve('screenshots');
+const srcGame = resolve(botDir, 'game');
+const srcScreenshots = resolve(botDir, 'screenshots');
 
 const destGame = resolve(outputDir, 'game');
 const destScreenshots = resolve(outputDir, 'screenshots');
